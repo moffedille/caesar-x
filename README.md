@@ -1,4 +1,4 @@
-Frontend - Caesar X
+Caesar X
 ---
 
 Dette er Caesar X skrevet i React med Astro. I denne applikasjonen kan du laste opp data til systemet, samt inspisere og manipulere dataen lastet inn.
