@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { SearchField } from "../../components/SearchField";
 import { DataTable } from '../../components/DataTable';
-import { ViewType, type Entry } from "../../types";
 import css from './Inspector.module.css';
 
 export const Inspector = () => {
-    const [viewType, setViewType] = useState<ViewType>(ViewType.Data);
-
-    const onViewChange = (newViewType: ViewType) => setViewType(newViewType);
-
     const [data, setData] = useState([]);
     const [limit, setLimit] = useState<number>(50);
     const [offset, setOffset] = useState<number>(0);
