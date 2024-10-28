@@ -1,0 +1,42 @@
+.dropZone {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 640px;
+    height: 200px;
+    background-color: #FBFBFB;
+    border: 4px dashed var(--foreground-color);
+    border-radius: 24px;
+    font-size: 18px;
+    line-height: 42px;
+    margin: 0 auto;
+}
+
+.dropZoneActive {
+    background-color: var(--foreground-color);
+}
+
+.processingFile {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 640px;
+    height: 200px;
+    background-color: var(--foreground-color);
+    border-radius: 24px;
+    font-size: 18px;
+    margin: 0 auto;
+}
+
+.fileExplorerButton {
+    cursor: pointer;
+    background-color: var(--foreground-color);
+    height: 42px;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 21px;
+    margin-left: 12px;
+}

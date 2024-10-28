@@ -1,0 +1,12 @@
+.containerWrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.searchContainer {
+    width: 100%;
+    max-width: 640px;
+}

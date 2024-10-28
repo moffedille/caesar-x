@@ -1,0 +1,37 @@
+---
+import { Navigation } from "../components/Navigation";
+import '../styles/dna.css';
+import '../styles/reset.css';
+
+const { title = null } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<html lang="no">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{!!title ? `${title} -` : ''} Brutus A/S</title>
+	</head>
+	<body>
+		<div class="wrapper">
+			<Navigation currentPath={path} />
+			<main class="container">
+				<slot />
+			</main>
+		</div>
+	</body>
+</html>
+<style>
+	.wrapper {
+		display: grid;
+		grid-template-columns: 240px auto;
+	}
+	.container {
+		padding: 48px 24px;
+		height: 100vh;
+		overflow-y: scroll;
+	}
+</style>

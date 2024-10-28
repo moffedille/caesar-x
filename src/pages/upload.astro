@@ -1,0 +1,98 @@
+---
+import dayjs from 'dayjs';
+import { UploadForm } from '../components/UploadForm';
+import Layout from '../layouts/Base.astro';
+import { db } from '../db';
+
+const getUploadedFiles = async () => {
+    const uploads = await db.query('SELECT * from uploads');
+    
+    if (uploads.rowCount > 0) {
+        return uploads.rows;
+    }
+
+    return [];
+}
+
+const uploadedFiles = await getUploadedFiles();
+
+const getStateLabel = (state) => {
+    if (state === 'success') {
+        return 'Importert';
+    } else if (state === 'pending') {
+        return 'Til behandling';
+    } else {
+        return 'Feil ved import';
+    }
+}
+---
+
+<Layout title="Last opp filer">
+    <UploadForm client:only="react" />
+    <section class="uploaded-files">
+        <h3>Oversikt over importerte filer</h3>
+        <table>
+            <tr>
+                <th>Opplastningsdato</th>
+                <th>Filnavn</th>
+                <th>Status</th>
+            </tr>
+            {uploadedFiles.map((file) => (
+                <tr>
+                    <td>{dayjs(file.uploaded_date).format('DD.MM.YYYY HH:mm')}</td>
+                    <td>{file.file_name}</td>
+                    <td class:list={['file-state', file.state]}>{getStateLabel(file.state)}</td>
+                </tr>
+            ))}
+        </table>
+    </section>
+</Layout>
+<style>
+    .uploaded-files {
+        margin-top: 24px;
+        max-width: 640px;
+        margin: 48px auto 24px;
+    }
+
+    .uploaded-files table {
+        width: 100%;
+        margin-top: 24px;
+        border-spacing: 0;
+    }
+
+    .uploaded-files th {
+        text-align: left;
+        padding-bottom: 8px;
+        font-size: 14px;
+        font-weight: 400;
+        border-bottom: 2px solid var(--foreground-color);
+    }
+    .uploaded-files td {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 12px;
+        border-bottom: 2px solid #EBEBEB;
+    }
+
+    .uploaded-files td.file-state {
+        display: flex;
+        align-items: center;
+    }
+
+    .uploaded-files td.file-state::after {
+        content: '';
+        display: block;
+        height: 12px;
+        width: 12px;
+        margin-left: 6px;
+        border-radius: 6px;
+    }
+
+    .uploaded-files td.file-state.pending::after {
+        background-color: #FFDE66;
+    }
+
+    .uploaded-files td.file-state.success::after {
+        background-color: #3FF588;
+    }
+</style>
